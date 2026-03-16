@@ -40,7 +40,7 @@ class Transaction(db.Model):
     amount: Mapped[float] = mapped_column(Float, nullable=False)
     description: Mapped[str] = mapped_column(String(255))
 
-    type: Mapped[str] = mapped_column(Enum("income", "expense", name="transaction_type"), String(10), nullable=False)
+    type: Mapped[str] = mapped_column(Enum("income", "expense", name="transaction_type"), nullable=False)
 
     date: Mapped[date] = mapped_column(Date)
 
