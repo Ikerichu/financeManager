@@ -23,3 +23,11 @@ class User(db.Model):
             "username": self.username,
             "email": self.email
         }
+    
+class Category(db.Model):
+    __tablename__ = "categories"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    name: Mapped[str] = mapped_column(String(50), nullable=False)
+
+    transactions: Mapped[List["Transaction"]] = relationship(back_populates="category")
