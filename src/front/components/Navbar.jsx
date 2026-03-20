@@ -1,6 +1,20 @@
 import React from "react";
+import React, { useState } from "react";
 
 export const Navbar = () => {
+
+  const [loginData, setLoginData] = useState({
+    email: "",
+    password: ""
+  });
+
+  const [registerData, setRegisterData] = useState({
+    name: "",
+    lastname: "",
+    email: "",
+    password: ""
+  });
+
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
