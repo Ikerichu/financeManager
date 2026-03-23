@@ -1,5 +1,5 @@
 import React from "react";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export const Navbar = () => {
 
@@ -70,6 +70,27 @@ export const Navbar = () => {
     localStorage.removeItem("token");
     setUser(null);
   };
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      fetch("/api/profile", {
+        headers: {
+          Authorization: "Bearer " + token
+        }
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (!data.msg) {
+            setUser(data);
+          } else {
+            localStorage.removeItem("token");
+          }
+        })
+        .catch(() => localStorage.removeItem("token"));
+    }
+  }, []);
 
   return (
     <>
