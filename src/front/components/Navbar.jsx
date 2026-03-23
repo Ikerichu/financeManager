@@ -94,7 +94,18 @@ export const Navbar = () => {
                   Register
                 </button>
               </>
-            )
+            ) : (
+              <>
+               
+                <button className="btn btn-outline-light">
+                  {user.name}
+                </button>
+
+                <button className="btn btn-danger" onClick={handleLogout}>
+                  Logout
+                </button>
+              </>
+            )}
           </div>
         </div>
       </nav>
