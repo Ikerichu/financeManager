@@ -3,6 +3,8 @@ import React, { useState } from "react";
 
 export const Navbar = () => {
 
+  const [user, setUser] = useState(null);
+
   const [loginData, setLoginData] = useState({
     email: "",
     password: ""
@@ -18,50 +20,50 @@ export const Navbar = () => {
   const handleLogin = async () => {
     try {
       const res = await fetch("/api/login", {
-       method: "POST",
+        method: "POST",
         headers: {
           "Content-Type": "application/json"
-       },
-       body: JSON.stringify(loginData)
-     });
+        },
+        body: JSON.stringify(loginData)
+      });
 
       const data = await res.json();
 
-     if (res.ok) {
+      if (res.ok) {
         localStorage.setItem("token", data.token);
         alert("Login correcto");
 
         document.getElementById("loginModalClose").click();
       } else {
-       alert(data.msg);
-     }
+        alert(data.msg);
+      }
     } catch (error) {
       console.error(error);
     }
   };
 
   const handleRegister = async () => {
-  try {
-    const res = await fetch("/api/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(registerData)
-    });
+    try {
+      const res = await fetch("/api/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(registerData)
+      });
 
-    const data = await res.json();
+      const data = await res.json();
 
-    if (res.ok) {
-      alert("Usuario creado");
+      if (res.ok) {
+        alert("Usuario creado");
 
-      document.getElementById("registerModalClose").click();
-    } else {
-      alert(data.msg);
+        document.getElementById("registerModalClose").click();
+      } else {
+        alert(data.msg);
+      }
+    } catch (error) {
+      console.error(error);
     }
-  } catch (error) {
-    console.error(error);
-  }
   };
 
   return (
@@ -73,27 +75,31 @@ export const Navbar = () => {
           </a>
 
           <div className="ms-auto d-flex gap-2">
-            
-            <button
-              className="btn btn-outline-light"
-              data-bs-toggle="modal"
-              data-bs-target="#loginModal"
-            >
-              Login
-            </button>
 
-            <button
-              className="btn btn-primary"
-              data-bs-toggle="modal"
-              data-bs-target="#registerModal"
-            >
-              Register
-            </button>
+            {!user ? (
+              <>
+                <button
+                  className="btn btn-outline-light"
+                  data-bs-toggle="modal"
+                  data-bs-target="#loginModal"
+                >
+                  Login
+                </button>
+
+                <button
+                  className="btn btn-primary"
+                  data-bs-toggle="modal"
+                  data-bs-target="#registerModal"
+                >
+                  Register
+                </button>
+              </>
+            )
           </div>
         </div>
       </nav>
-	  {/*Modales*/}
-	  <div className="modal fade" id="loginModal" tabIndex="-1">
+      {/*Modales*/}
+      <div className="modal fade" id="loginModal" tabIndex="-1">
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header">
@@ -104,13 +110,13 @@ export const Navbar = () => {
               <form>
                 <div className="mb-3">
                   <label className="form-label">Email</label>
-                  <input type="email" className="form-control" 
-                  onChange={(e) => setLoginData({ ...loginData, email: e.target.value })} />
+                  <input type="email" className="form-control"
+                    onChange={(e) => setLoginData({ ...loginData, email: e.target.value })} />
                 </div>
                 <div className="mb-3">
                   <label className="form-label">Password</label>
-                  <input type="password" className="form-control" 
-                  onChange={(e) => setLoginData({ ...loginData, password: e.target.value })} />
+                  <input type="password" className="form-control"
+                    onChange={(e) => setLoginData({ ...loginData, password: e.target.value })} />
                 </div>
               </form>
             </div>
@@ -125,9 +131,9 @@ export const Navbar = () => {
           </div>
         </div>
       </div>
-	  
 
-	  <div className="modal fade" id="registerModal" tabIndex="-1">
+
+      <div className="modal fade" id="registerModal" tabIndex="-1">
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header">
@@ -138,23 +144,23 @@ export const Navbar = () => {
               <form>
                 <div className="mb-3">
                   <label className="form-label">Name</label>
-                  <input type="text" className="form-control" 
-                  onChange={(e) => setRegisterData({ ...registerData, name: e.target.value })} />
+                  <input type="text" className="form-control"
+                    onChange={(e) => setRegisterData({ ...registerData, name: e.target.value })} />
                 </div>
                 <div className="mb-3">
                   <label className="form-label">Last Name</label>
                   <input type="text" className="form-control"
-                  onChange={(e) => setRegisterData({ ...registerData, lastName: e.target.value })} />
+                    onChange={(e) => setRegisterData({ ...registerData, lastName: e.target.value })} />
                 </div>
                 <div className="mb-3">
                   <label className="form-label">Email</label>
-                  <input type="email" className="form-control" 
-                  onChange={(e) => setRegisterData({ ...registerData, email: e.target.value })} />
+                  <input type="email" className="form-control"
+                    onChange={(e) => setRegisterData({ ...registerData, email: e.target.value })} />
                 </div>
                 <div className="mb-3">
                   <label className="form-label">Password</label>
-                  <input type="password" className="form-control" 
-                  onChange={(e) => setRegisterData({ ...registerData, password: e.target.value })} />
+                  <input type="password" className="form-control"
+                    onChange={(e) => setRegisterData({ ...registerData, password: e.target.value })} />
                 </div>
               </form>
             </div>
