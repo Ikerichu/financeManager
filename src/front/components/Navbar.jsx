@@ -31,6 +31,8 @@ export const Navbar = () => {
 
       if (res.ok) {
         localStorage.setItem("token", data.token);
+        
+        setUser(data.user);
         alert("Login correcto");
 
         document.getElementById("loginModalClose").click();
