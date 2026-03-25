@@ -126,7 +126,7 @@ export const Navbar = () => {
             ) : (
               <>
 
-                <button className="btn btn-outline-light">
+                <button className="btn btn-outline-light" Link to="/profile">
                   {user.name}
                 </button>
 

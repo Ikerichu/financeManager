@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
+import {useNavigate} from "react-router-dom";
 
 export const Profile = () => {
   const [user, setUser] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
 
     if (!token) {
-      window.location.href = "/"; // no logueado → fuera
+      navigate("/");
       return;
     }
 
@@ -20,14 +22,14 @@ export const Profile = () => {
       .then(data => {
         if (data.msg) {
           localStorage.removeItem("token");
-          window.location.href = "/";
+          navigate("/");
         } else {
           setUser(data);
         }
       })
       .catch(() => {
         localStorage.removeItem("token");
-        window.location.href = "/";
+        navigate("/");
       });
   }, []);
 
