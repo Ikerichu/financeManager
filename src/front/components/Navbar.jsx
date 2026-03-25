@@ -1,5 +1,6 @@
 import React from "react";
 import React, { useState, useEffect } from "react";
+import Link from "react-router-dom";
 
 export const Navbar = () => {
 
@@ -98,8 +99,8 @@ export const Navbar = () => {
     <>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <div className="container">
-          <a className="navbar-brand" href="/">
-            Manage your money
+          <a className="navbar-brand" Link to="/">
+            TrackMyMoney
           </a>
 
           <div className="ms-auto d-flex gap-2">
