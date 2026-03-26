@@ -1,8 +1,8 @@
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import String, Float, Date, ForeignKey, Enum
+from sqlalchemy import String, Float, Date, ForeignKey, Enum, DateTime
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from typing import List
-from datetime import date
+from datetime import datetime, timezone
 
 db = SQLAlchemy()
 
@@ -52,10 +52,11 @@ class Transaction(db.Model):
 
     type: Mapped[str] = mapped_column(Enum("income", "expense", name="transaction_type"), nullable=False)
 
-    date: Mapped[date] = mapped_column(Date)
+    date: Mapped[datetime] = mapped_column(
+        DateTime, default=lambda: datetime.now(timezone.utc), nullable=False)
 
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
-    category_id: Mapped[int] = mapped_column(ForeignKey("categories.id"))
+    category_id: Mapped[int] = mapped_column(ForeignKey("categories.id"), nullable=True)
 
     user: Mapped["User"] = relationship(back_populates="transactions")
     category: Mapped["Category"] = relationship(back_populates="transactions")
@@ -68,6 +69,14 @@ class Transaction(db.Model):
             "type": self.type,
             "date": self.date.isoformat() if self.date else None,
             "user_id": self.user_id,
-            "category_id": self.category_id,
-            "category": self.category.name if self.category else None
+            "category_id": self.category_id if self.category_id else 1,
+            "category": self.category.name if self.category else "Default"
         }
+
+def create_default_category():
+    from .models import Category  # importa tu modelo
+    general = Category.query.get(1)
+    if not general:
+        general = Category(id=1, name="General")
+        db.session.add(general)
+        db.session.commit()

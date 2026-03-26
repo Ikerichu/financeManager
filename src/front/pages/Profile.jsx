@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import {useNavigate} from "react-router-dom";
+import { initialStore } from "../store";
 
 export const Profile = () => {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = initialStore.token || localStorage.getItem("token");
 
     if (!token) {
       navigate("/");

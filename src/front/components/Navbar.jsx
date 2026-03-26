@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import { initialStore } from "../store";
 
 export const Navbar = () => {
 
@@ -30,11 +31,12 @@ export const Navbar = () => {
       const data = await res.json();
 
       if (res.ok) {
+        initialStore.token = data.token;
         localStorage.setItem("token", data.token);
 
         setUser(data.user);
         alert("Login correcto");
-
+        setLoginData({ email: "", password: "" });
         document.getElementById("loginModalClose").click();
       } else {
         alert(data.msg);
@@ -58,7 +60,7 @@ export const Navbar = () => {
 
       if (res.ok) {
         alert("Usuario creado");
-
+        setRegisterData({ name: "", lastname: "", email: "", password: "" });
         document.getElementById("registerModalClose").click();
       } else {
         alert(data.msg);
@@ -77,7 +79,7 @@ export const Navbar = () => {
     const token = localStorage.getItem("token");
 
     if (token) {
-      fetch("/api/profile", {
+      fetch(`${import.meta.env.VITE_BACKEND_URL}/api/profile`, {
         headers: {
           Authorization: "Bearer " + token
         }
@@ -189,7 +191,7 @@ export const Navbar = () => {
                 <div className="mb-3">
                   <label className="form-label">Last Name</label>
                   <input type="text" className="form-control"
-                    onChange={(e) => setRegisterData({ ...registerData, lastName: e.target.value })} />
+                    onChange={(e) => setRegisterData({ ...registerData, lastname: e.target.value })} />
                 </div>
                 <div className="mb-3">
                   <label className="form-label">Email</label>
