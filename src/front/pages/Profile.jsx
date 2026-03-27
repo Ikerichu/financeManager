@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { initialStore } from "../store";
 
 export const Profile = () => {
@@ -40,12 +40,50 @@ export const Profile = () => {
 
   return (
     <div className="container mt-5">
-      <div className="card p-4">
-        <h2 className="mb-4">Profile</h2>
+      <div className="row justify-content-center">
+        <div className="col-md-6 col-lg-5">
 
-        <p><strong>Nombre:</strong> {user.name}</p>
-        <p><strong>Apellido:</strong> {user.lastname}</p>
-        <p><strong>Email:</strong> {user.email}</p>
+          <div className="card shadow border-0">
+
+            {/* Header */}
+            <div className="card-header bg-primary text-white text-center">
+              <h4 className="mb-0">Perfil</h4>
+            </div>
+
+            {/* Body */}
+            <div className="card-body">
+
+              <div className="mb-3">
+                <label className="form-label text-muted mb-1">Nombre</label>
+                <div className="form-control bg-light">
+                  {user.name}
+                </div>
+              </div>
+
+              <div className="mb-3">
+                <label className="form-label text-muted mb-1">Apellido</label>
+                <div className="form-control bg-light">
+                  {user.lastname}
+                </div>
+              </div>
+
+              <div className="mb-3">
+                <label className="form-label text-muted mb-1">Email</label>
+                <div className="form-control bg-light">
+                  {user.email}
+                </div>
+              </div>
+
+              <div className="d-grid mt-4">
+                <button className="btn btn-primary">
+                  Editar perfil
+                </button>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
   );
