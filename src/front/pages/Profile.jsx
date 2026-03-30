@@ -45,24 +45,22 @@ export const Profile = () => {
 
           <div className="card shadow border-0">
 
-            {/* Header */}
             <div className="card-header bg-primary text-white text-center">
               <h4 className="mb-0">Perfil</h4>
             </div>
 
-            {/* Body */}
             <div className="card-body">
 
               <div className="mb-3">
                 <label className="form-label text-muted mb-1">Nombre</label>
-                <div className="form-control bg-light">
+                <div className="form-control bg-light txt-capitalize">
                   {user.name}
                 </div>
               </div>
 
               <div className="mb-3">
                 <label className="form-label text-muted mb-1">Apellido</label>
-                <div className="form-control bg-light">
+                <div className="form-control bg-light txt-capitalize">
                   {user.lastname}
                 </div>
               </div>

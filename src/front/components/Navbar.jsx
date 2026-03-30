@@ -127,7 +127,7 @@ export const Navbar = () => {
             ) : (
               <>
 
-                <Link to="/profile" className="btn btn-outline-light">
+                <Link to="/profile" className="btn btn-outline-light txt-capitalize">
                   {user.name}
                 </Link>
 
