@@ -63,13 +63,13 @@ export const Home = () => {
       const data = await res.json();
 
       if (res.ok) {
-        alert("Transacción añadida");
+        toast.success("Transacción añadida");
 
         document.getElementById("closeTransactionModal").click();
         setTransaction({ amount: "", type: "expense", description: "" });
         await fetchTransactions();
       } else {
-        alert(data.msg);
+        toast.error(data.msg);
       }
     } catch (error) {
       console.error(error);
@@ -91,10 +91,10 @@ export const Home = () => {
       );
 
       if (res.ok) {
-        alert("Transacción eliminada");
+        toast.success("Transacción eliminada");
         await fetchTransactions();
       } else {
-        alert("Error al eliminar la transacción");
+        toast.error("Error al eliminar la transacción");
       }
     } catch (error) {
       console.error(error);
