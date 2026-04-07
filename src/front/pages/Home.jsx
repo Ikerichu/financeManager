@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 import { initialStore } from "../store";
+import { toast } from 'react-toastify';
 
 export const Home = () => {
   const [transactions, setTransactions] = useState([]);
