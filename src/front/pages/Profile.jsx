@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { initialStore } from "../store";
+import { toast } from 'react-toastify';
 
 export const Profile = () => {
   const [user, setUser] = useState(null);
@@ -26,12 +27,12 @@ export const Profile = () => {
       const data = await res.json();
 
       if (res.ok) {
-        alert("Perfil actualizado");
+        toast.success("Perfil actualizado");
         setUser(data);
         setEditData({ email: "", password: "" });
         document.getElementById("editModalClose").click();
       } else {
-        alert(data.msg);
+        toast.error(data.msg);
       }
     } catch (error) {
       console.error(error);
