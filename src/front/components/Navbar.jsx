@@ -64,7 +64,7 @@ export const Navbar = () => {
         setRegisterData({ name: "", lastname: "", email: "", password: "" });
         document.getElementById("registerModalClose").click();
       } else {
-        alert(data.msg);
+        toast.error(data.msg);
       }
     } catch (error) {
       console.error(error);
