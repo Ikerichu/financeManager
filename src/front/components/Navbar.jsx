@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { initialStore } from "../store";
+import { toast } from 'react-toastify';
 
 export const Navbar = () => {
 
@@ -35,11 +36,11 @@ export const Navbar = () => {
         localStorage.setItem("token", data.token);
 
         setUser(data.user);
-        alert("Login correcto");
+        toast.success("Login correcto");
         setLoginData({ email: "", password: "" });
         document.getElementById("loginModalClose").click();
       } else {
-        alert(data.msg);
+        toast.error(data.msg);
       }
     } catch (error) {
       console.error(error);
@@ -59,7 +60,7 @@ export const Navbar = () => {
       const data = await res.json();
 
       if (res.ok) {
-        alert("Usuario creado");
+        toast.success("Usuario creado");
         setRegisterData({ name: "", lastname: "", email: "", password: "" });
         document.getElementById("registerModalClose").click();
       } else {
