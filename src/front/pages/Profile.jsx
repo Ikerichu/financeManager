@@ -15,6 +15,11 @@ export const Profile = () => {
     try {
       const token = initialStore.token || localStorage.getItem("token");
 
+      if(editData.password.length < 6) {
+        toast.error("La contraseña debe tener al menos 6 caracteres");
+        return;
+      }
+
       const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/profile`, {
         method: "POST",
         headers: {
