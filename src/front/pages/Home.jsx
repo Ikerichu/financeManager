@@ -103,7 +103,6 @@ export const Home = () => {
 
   return (
     <div className="container mt-4">
-      <h1 className="mb-4">Dashboard</h1>
 
       <div className="row text-center">
         <div className="col-md-4 mb-3">
